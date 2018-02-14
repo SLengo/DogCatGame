@@ -32,78 +32,21 @@ namespace DogCatGame.Animations
         public static string start_gif = AppDomain.CurrentDomain.BaseDirectory + @"gifs\start_circle.gif";
 
 
-
-        public static void StartAnimation(Button btn_for_anim)
-        {
-            btn_for_anim.Margin = new Thickness(0,
-                0,
-                0, 0);
-            btn_for_anim.Width = 1000;
-            btn_for_anim.Height = 700;
-            btn_for_anim.Focusable = false;
-
-            ThicknessAnimation Start = new ThicknessAnimation();
-            Start.From = btn_for_anim.Margin;
-            Start.To = new Thickness(btn_for_anim.Margin.Left, btn_for_anim.Margin.Top, btn_for_anim.Margin.Right, btn_for_anim.Margin.Bottom);
-            Start.BeginTime = new TimeSpan(0);
-            Start.Duration = new Duration(TimeSpan.FromMilliseconds(2200));
-            Start.Completed += new EventHandler(StartAnimationCompleted);
-
-            BitmapImage gif = new BitmapImage();
-            gif.BeginInit();
-            gif.CacheOption = BitmapCacheOption.OnLoad;
-            gif.UriSource = new Uri(start_gif);
-            gif.EndInit();
-
-            Image img = new Image();
-            WpfAnimatedGif.ImageBehavior.SetAnimatedSource(img, gif);
-
-            btn_for_anim.Content = img;
-
-            btn_for_anim.BeginAnimation(StackPanel.MarginProperty, Start);
-        }
-        public static void StartAnimationCompleted(object sender, EventArgs e)
-        {
-            ((MainWindow)Application.Current.MainWindow).StartCompleted();
-        }
-
-
-
-        public static void GoAnimation(DogCatGame.Animals.Animal panel_for_anim, string way)
+        public static void GoAnimation(DogCatGame.Animals.Animal panel_for_anim, double animation_to_x, string way)
         {
             panel_for_anim.Children.Clear();
 
             ThicknessAnimation Go = new ThicknessAnimation();
             Go.From = panel_for_anim.Margin;
 
-            double coord_to = 0;
-            if(way == "ltr")
-            {
-                double width_sum = 0;
-                foreach (Animals.Animal item in ((MainWindow)Application.Current.MainWindow).AnimalsList)
-                {
-                    width_sum += item.Width + ((MainWindow)Application.Current.MainWindow).start_pos;
-                    if (((MainWindow)Application.Current.MainWindow).AnimalsList.Count > 1)
-                    {
-                        if (item is Animals.Bear) width_sum -= 50;
-                        if (item is Animals.Cat) width_sum -= 20;
-                        if (item is Animals.Dog) width_sum -= 30;
-                    }
-                }
-                coord_to = panel_for_anim.Margin.Left + width_sum;
-            }
-            else
-            {
-                coord_to = 0 - panel_for_anim.Width * 2;
-            }
+           
 
-            Go.To = way == "ltr" ? new Thickness(coord_to, panel_for_anim.Margin.Top, panel_for_anim.Margin.Right, panel_for_anim.Margin.Bottom) : 
-                new Thickness(coord_to, panel_for_anim.Margin.Top, panel_for_anim.Margin.Right, panel_for_anim.Margin.Bottom);
+            Go.To = way == "ltr" ? new Thickness(animation_to_x, panel_for_anim.Margin.Top, panel_for_anim.Margin.Right, panel_for_anim.Margin.Bottom) : 
+                new Thickness(animation_to_x, panel_for_anim.Margin.Top, panel_for_anim.Margin.Right, panel_for_anim.Margin.Bottom);
 
             Go.BeginTime = new TimeSpan( 0 );
             Go.Duration = new Duration(TimeSpan.FromMilliseconds(2500));
             Go.Completed += new EventHandler(GoAnimationCompleted);
-            //Go.SetValue(Storyboard.TargetNameProperty, "cat");
 
             BitmapImage gif = new BitmapImage();
             gif.BeginInit();            
@@ -133,6 +76,7 @@ namespace DogCatGame.Animations
             panel_for_anim.BeginAnimation(StackPanel.MarginProperty, Go);
         }
 
+        // animals sit down
         public static void GoAnimationCompleted(object sender, EventArgs e)
         {
             foreach (Animals.Animal item in ((MainWindow)Application.Current.MainWindow).canvas_visual.Children)

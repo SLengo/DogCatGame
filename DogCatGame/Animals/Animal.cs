@@ -19,13 +19,13 @@ namespace DogCatGame.Animals
 {
     public class Animal : StackPanel
     {
-        public void GoLeftToRight()
+        public void GoLeftToRight(double go_x)
         {
-            Animations.ElementAnimations.GoAnimation(this, "ltr");
+            Animations.ElementAnimations.GoAnimation(this, go_x, "ltr");
         }
-        public void GoRightToLeft()
+        public void GoRightToLeft(double go_x)
         {
-            Animations.ElementAnimations.GoAnimation(this, "");
+            Animations.ElementAnimations.GoAnimation(this, go_x, "");
         }
     }
 }
