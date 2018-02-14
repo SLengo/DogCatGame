@@ -98,46 +98,89 @@ namespace DogCatGame
             Random rand_count = new Random();
             Random rand_animal = new Random();
             int count_animals = rand_count.Next(2, 5);
+            Animals.Animal new_animal = null;
             for (int i = 0; i < count_animals; i++)
             {
-                int kind = rand_animal.Next(0, 90);
-                if(kind >= 0 && kind < 30)
+                int kind = rand_animal.Next(0, 3);
+                switch (kind)
                 {
-                    Animals.Dog dog = new Animals.Dog();
-                    dog.Width = dog_stay_width;
-                    dog.Height = dog_stay_height;
-                    dog.Margin = new Thickness(-dog_stay_width - start_pos, 0, 0, 0);
-                    AnimalsList.Add(dog);
-                    Canvas.SetBottom(dog, 20);
-                    canvas_visual.Children.Add(dog);
-                    StackPanel.SetZIndex(dog, 2);
-                    dog.GoLeftToRight();
+                    case 0:
+                        {
+                            Animals.Dog dog = new Animals.Dog();
+                            dog.Name = "dog";
+                            dog.Width = dog_stay_width;
+                            dog.Height = dog_stay_height;
+                            dog.Margin = new Thickness(-dog_stay_width - start_pos, 0, 0, 0);
+                            AnimalsList.Add(dog);
+                            Canvas.SetBottom(dog, 10);
+                            canvas_visual.Children.Add(dog);
+                            StackPanel.SetZIndex(dog, 2);
+                            new_animal = dog;
+                            break;
+                        }
+                    case 1:
+                        {
+                            Animals.Cat cat = new Animals.Cat();
+                            cat.Width = cat_stay_width;
+                            cat.Name = "cat";
+                            cat.Height = cat_stay_width;
+                            cat.Margin = new Thickness(-cat_stay_width - start_pos, 0, 0, 0);
+                            Canvas.SetBottom(cat, 10);
+                            AnimalsList.Add(cat);
+                            canvas_visual.Children.Add(cat);
+                            StackPanel.SetZIndex(cat, 2);
+                            new_animal = cat;
+                            break;
+                        }
+                    case 2:
+                        {
+                            Animals.Bear bear = new Animals.Bear();
+                            bear.Width = bear_stay_width;
+                            bear.Name = "bear";
+                            bear.Height = bear_stay_height;
+                            bear.Margin = new Thickness(-bear_stay_width - start_pos, 0, 0, 0);
+                            Canvas.SetBottom(bear, 20);
+                            AnimalsList.Add(bear);
+                            canvas_visual.Children.Add(bear);
+                            new_animal = bear;
+                            break;
+                        }
                 }
-                else if (kind > 30 && kind <= 60)
-                {
-                    Animals.Cat cat = new Animals.Cat();
-                    cat.Width = cat_stay_width;
-                    cat.Height = cat_stay_width;
-                    cat.Margin = new Thickness(-cat_stay_width - start_pos, 0, 0, 0);
-                    Canvas.SetBottom(cat, 20);
-                    AnimalsList.Add(cat);
-                    canvas_visual.Children.Add(cat);
-                    StackPanel.SetZIndex(cat, 2);
-                    cat.GoLeftToRight();
-                }
-                else
-                {
-                    Animals.Bear bear = new Animals.Bear();
-                    bear.Width = bear_stay_width;
-                    bear.Height = bear_stay_height;
-                    bear.Margin = new Thickness(-bear_stay_width - start_pos, 0, 0, 0);
-                    Canvas.SetBottom(bear, 20);
-                    AnimalsList.Add(bear);
-                    canvas_visual.Children.Add(bear);
-                    bear.GoLeftToRight();
 
+                //calc x coord to
+                double coord_to = 0;
+
+                switch(i)
+                {
+                    case 0:
+                        {
+                            coord_to = new_animal.Margin.Left + AnimalsList[0].Width + 50;
+                            break;
+                        }
+                    case 1:
+                        {
+                            coord_to = new_animal.Margin.Left + 250;
+                            break;
+                        }
+                    case 2:
+                        {
+                            coord_to = new_animal.Margin.Left + 350;
+                            break;
+                        }
+                    case 3:
+                        {
+                            coord_to = new_animal.Margin.Left + 450;
+                            break;
+                        }
                 }
+
+                // go animation
+                new_animal.GoLeftToRight(coord_to);
             }
+
+            // ask question
+            Questions.AskQuestion();
+
         }
         
     }
