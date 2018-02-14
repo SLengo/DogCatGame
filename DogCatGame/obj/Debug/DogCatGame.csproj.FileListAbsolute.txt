@@ -12,3 +12,4 @@ E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.csproj.GenerateResource.Cache
 E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.csproj.CoreCompileInputs.cache
 E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.exe
 E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.pdb
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.csprojResolveAssemblyReference.cache
