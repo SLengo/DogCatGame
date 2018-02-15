@@ -23,13 +23,14 @@ namespace DogCatGame
         public static string current_right_answer = "";
         public static string prev_ques = "";
 
+
         public static Dictionary<string, string> question_patterns = new Dictionary<string, string>();
 
         public static Dictionary<string, string> GetQuesPatterns()
         {
             question_patterns.Clear();
 
-            question_patterns.Add("counting", "Сколько всего живтоных?"); // always avaliable
+            question_patterns.Add("counting", "Сколько всего животных?"); // always avaliable
             question_patterns.Add("counting_add", "Сколько будет животных, если придёт еще 1?"); // if count animals < 4
             question_patterns.Add("counting_minus", "Сколько будет животных, если уйдёт 1?"); // if count animals > 2
 
@@ -192,10 +193,11 @@ namespace DogCatGame
             }
         }
 
-        public static void Btn_Answer(object sender, RoutedEventArgs e)
+        public static async void Btn_Answer(object sender, RoutedEventArgs e)
         {
             if (current_right_answer == (sender as Button).Name.Split('_').Last())
             {
+                QuestionTextBlock.Text = "Правильно!\n(｡◕‿‿◕｡)";
                 ((MainWindow)Application.Current.MainWindow).canvas_question_options.Children.Clear();
                 int answer_num = 0;
                 Random rand_go = new Random();
@@ -212,11 +214,23 @@ namespace DogCatGame
                         (o => o.Name.Contains((sender as Button).Name.Split('_').Last()));
                     animal_to_go.GoRightToLeft(-300);
                 }
+                ((MainWindow)Application.Current.MainWindow).common_score++;
+                ((MainWindow)Application.Current.MainWindow).Score.Content =
+                    ((MainWindow)Application.Current.MainWindow).common_score;
             }
             else
             {
-
+                string temp_ques = QuestionTextBlock.Text;
+                QuestionTextBlock.Text = "Неверно!\n☹";
+                var result = await SimLongRunningProcessAsync();
+                QuestionTextBlock.Text = temp_ques;
             }
+        }
+
+        private static async Task<string> SimLongRunningProcessAsync()
+        {
+            await Task.Delay(1000);
+            return "Success";
         }
     }
 }

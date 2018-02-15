@@ -26,6 +26,7 @@ namespace DogCatGame
         }
         public Button StartButton = new Button();
 
+
         public List<Animals.Animal> AnimalsList = new List<Animals.Animal>();
 
         public int start_pos = 50;
@@ -42,6 +43,8 @@ namespace DogCatGame
         public int common_score = 0;
 
         public bool WasInit = false;
+
+        public Label Score = null;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -77,6 +80,36 @@ namespace DogCatGame
             StartButton.Margin = new Thickness(100,150,0,0);
 
             canvas_question.Children.Add(StartButton);
+            #endregion
+
+            #region coin animation
+            StackPanel Coin = new StackPanel();
+            Coin.Width = 50; Coin.Height = 50;
+            Coin.Margin = new Thickness(canvas_main.ActualWidth - 60,20,0,0);
+            BitmapImage gif = new BitmapImage();
+            gif.BeginInit();
+            gif.UriSource = new Uri(AppDomain.CurrentDomain.BaseDirectory + @"gifs\coin.gif");
+            gif.EndInit();
+
+            Image img = new Image();
+            WpfAnimatedGif.ImageBehavior.SetAnimatedSource(img, gif);
+
+            Coin.Children.Add(img);
+
+            Score = new Label();
+            Score.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            Score.VerticalAlignment = VerticalAlignment.Bottom;
+            Score.Width = 120;
+            Score.Height = 50;
+            Score.Margin = new Thickness(canvas_main.ActualWidth - 125, 20,0,0);
+            Score.Foreground = new SolidColorBrush(Color.FromRgb(255,165,36));
+            Score.FontSize = 50;
+            Score.FontWeight = (FontWeight)System.ComponentModel.TypeDescriptor.GetConverter(typeof(FontWeight))
+                .ConvertFromString("Bold");
+            Score.Content = common_score;
+
+            canvas_main.Children.Add(Score);
+            canvas_main.Children.Add(Coin);
             #endregion
         }
 
