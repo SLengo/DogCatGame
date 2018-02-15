@@ -125,6 +125,10 @@ namespace DogCatGame.Animations
 
                 item.Children.Add(img);
             }
+            foreach (Button item in ((MainWindow)Application.Current.MainWindow).canvas_question_options.Children)
+            {
+                item.IsEnabled = true;
+            }
         }
 
 

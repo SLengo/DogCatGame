@@ -87,6 +87,15 @@ namespace DogCatGame
             prev_ques = avaliable_questions[id_ques];
             QuestionTextBlock.Text = (ques);
             MakeButtonOptions(avaliable_questions[id_ques]);
+
+            if (((MainWindow)Application.Current.MainWindow).WasInit)
+            {
+                foreach (Button item in ((MainWindow)Application.Current.MainWindow).canvas_question_options.Children)
+                {
+                    item.IsEnabled = false;
+                }
+                ((MainWindow)Application.Current.MainWindow).WasInit = false;
+            }
         }
 
         public static void MakeButtonOptions(string questions)
@@ -106,6 +115,8 @@ namespace DogCatGame
                             btn.Content = Convert.ToString(i + 1);
                             btn.Margin = new Thickness(0 + (200 * i),100,0,0);
                             btn.Click += new RoutedEventHandler(Btn_Answer);
+                            btn.MouseEnter += new MouseEventHandler(Button_Over);
+                            btn.MouseLeave += new MouseEventHandler(Button_Leave);
                             ((MainWindow)Application.Current.MainWindow).canvas_question_options.Children.Add(btn);
                         }
                         if(questions == "counting_add")
@@ -148,6 +159,9 @@ namespace DogCatGame
                                     }
                             }
 
+                            btn.MouseEnter += new MouseEventHandler(Button_Over);
+                            btn.MouseLeave += new MouseEventHandler(Button_Leave);
+
                             btn.Content = head;
                             btn.Margin = new Thickness(0 + (200 * i), 100, 0, 0);
                             btn.Click += new RoutedEventHandler(Btn_Answer);
@@ -156,6 +170,25 @@ namespace DogCatGame
                         }
                         break;
                     }
+            }
+        }
+
+        public static void Button_Over(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button) (sender as Button).FontSize = 60;
+            if ((sender as Button).Content is Image)
+            {
+                (sender as Button).Height = (sender as Button).ActualHeight * 1.1;
+                (sender as Button).Width = (sender as Button).ActualWidth * 1.1;
+            }
+        }
+        public static void Button_Leave(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button) (sender as Button).FontSize = 50;
+            if ((sender as Button).Content is Image)
+            {
+                (sender as Button).Height /= 1.1;
+                (sender as Button).Width /= 1.1;
             }
         }
 

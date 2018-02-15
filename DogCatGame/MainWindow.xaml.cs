@@ -41,6 +41,8 @@ namespace DogCatGame
 
         public int common_score = 0;
 
+        public bool WasInit = false;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             #region background
@@ -81,7 +83,7 @@ namespace DogCatGame
         private void StartButton_click(object sender, RoutedEventArgs e)
         {
             canvas_question.Children.Remove(StartButton);
-            InitAnimals(2, 5);
+            InitAnimals(3, 5);
         }
         private void StartButton_MouseOver(object sender, RoutedEventArgs e)
         {
@@ -100,6 +102,7 @@ namespace DogCatGame
             Animals.Animal new_animal = null;
             for (int i = AnimalsList.Count + 1; i < count_animals; i++)
             {
+                WasInit = true;
                 int kind = rand_animal.Next(0, 3);
                 switch (kind)
                 {
