@@ -1,0 +1,15 @@
+E:\DogCatGame\DogCatGame\bin\Debug\DogCatGame.exe.config
+E:\DogCatGame\DogCatGame\bin\Debug\DogCatGame.exe
+E:\DogCatGame\DogCatGame\bin\Debug\DogCatGame.pdb
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.csprojResolveAssemblyReference.cache
+E:\DogCatGame\DogCatGame\obj\Debug\MainWindow.g.cs
+E:\DogCatGame\DogCatGame\obj\Debug\App.g.cs
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame_MarkupCompile.cache
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame_MarkupCompile.lref
+E:\DogCatGame\DogCatGame\obj\Debug\MainWindow.baml
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.g.resources
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.Properties.Resources.resources
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.csproj.GenerateResource.Cache
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.csproj.CoreCompileInputs.cache
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.exe
+E:\DogCatGame\DogCatGame\obj\Debug\DogCatGame.pdb

@@ -21,7 +21,7 @@ namespace DogCatGame
         public static TextBlock QuestionTextBlock = null;
 
         public static string current_right_answer = "";
-
+        public static string prev_ques = "";
 
         public static Dictionary<string, string> question_patterns = new Dictionary<string, string>();
 
@@ -77,7 +77,15 @@ namespace DogCatGame
             Random rand_ques = new Random();
             int id_ques = rand_ques.Next(0, avaliable_questions.Count);
 
-            QuestionTextBlock.Text = (GetQuesPatterns()[avaliable_questions[id_ques]]);
+            string ques = GetQuesPatterns()[avaliable_questions[id_ques]];
+            
+            while(prev_ques == avaliable_questions[id_ques])
+            {
+                id_ques = rand_ques.Next(0, avaliable_questions.Count);
+                ques = GetQuesPatterns()[avaliable_questions[id_ques]];
+            }
+            prev_ques = avaliable_questions[id_ques];
+            QuestionTextBlock.Text = (ques);
             MakeButtonOptions(avaliable_questions[id_ques]);
         }
 
@@ -154,9 +162,28 @@ namespace DogCatGame
         public static void Btn_Answer(object sender, RoutedEventArgs e)
         {
             if (current_right_answer == (sender as Button).Name.Split('_').Last())
-                MessageBox.Show("Rigth!");
+            {
+                ((MainWindow)Application.Current.MainWindow).canvas_question_options.Children.Clear();
+                int answer_num = 0;
+                Random rand_go = new Random();
+                int count_of_animals = ((MainWindow)Application.Current.MainWindow).AnimalsList.Count;
+                if (Int32.TryParse((sender as Button).Name.Split('_').Last(), out answer_num))
+                {
+                    ((MainWindow)Application.Current.MainWindow).AnimalsList[rand_go.Next(0, count_of_animals)].GoRightToLeft(
+                        -300
+                        );
+                }
+                else
+                {
+                    Animals.Animal animal_to_go = ((MainWindow)Application.Current.MainWindow).AnimalsList.FirstOrDefault
+                        (o => o.Name.Contains((sender as Button).Name.Split('_').Last()));
+                    animal_to_go.GoRightToLeft(-300);
+                }
+            }
             else
-                MessageBox.Show("Wrong!");
+            {
+
+            }
         }
     }
 }

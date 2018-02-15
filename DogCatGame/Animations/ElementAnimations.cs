@@ -31,6 +31,7 @@ namespace DogCatGame.Animations
 
         public static string start_gif = AppDomain.CurrentDomain.BaseDirectory + @"gifs\start_circle.gif";
 
+        private static Animals.Animal currnet_ltr_animal = null;
 
         public static void GoAnimation(DogCatGame.Animals.Animal panel_for_anim, double animation_to_x, string way)
         {
@@ -39,14 +40,20 @@ namespace DogCatGame.Animations
             ThicknessAnimation Go = new ThicknessAnimation();
             Go.From = panel_for_anim.Margin;
 
-           
 
-            Go.To = way == "ltr" ? new Thickness(animation_to_x, panel_for_anim.Margin.Top, panel_for_anim.Margin.Right, panel_for_anim.Margin.Bottom) : 
-                new Thickness(animation_to_x, panel_for_anim.Margin.Top, panel_for_anim.Margin.Right, panel_for_anim.Margin.Bottom);
+
+            Go.To = new Thickness(animation_to_x, panel_for_anim.Margin.Top, panel_for_anim.Margin.Right, panel_for_anim.Margin.Bottom);
+
+            panel_for_anim.Margin = new Thickness(animation_to_x, panel_for_anim.Margin.Top, panel_for_anim.Margin.Right, panel_for_anim.Margin.Bottom);
 
             Go.BeginTime = new TimeSpan( 0 );
             Go.Duration = new Duration(TimeSpan.FromMilliseconds(2500));
-            Go.Completed += new EventHandler(GoAnimationCompleted);
+            if (way == "ltr")
+                Go.Completed += new EventHandler(GoAnimationCompleted);
+            else
+            {
+                Go.Completed += new EventHandler(GoAnimationCompletedOne);
+            }
 
             BitmapImage gif = new BitmapImage();
             gif.BeginInit();            
@@ -73,7 +80,17 @@ namespace DogCatGame.Animations
 
             panel_for_anim.Children.Add(img);
 
+            if (way != "ltr") currnet_ltr_animal = panel_for_anim;
+
             panel_for_anim.BeginAnimation(StackPanel.MarginProperty, Go);
+        }
+
+        public static void GoAnimationCompletedOne(object sender, EventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).AnimalsList.Remove(currnet_ltr_animal);
+            ((MainWindow)Application.Current.MainWindow).canvas_visual.Children.Remove(currnet_ltr_animal);
+            if (((MainWindow)Application.Current.MainWindow).AnimalsList.Count <= 2) //// ??????????
+                ((MainWindow)Application.Current.MainWindow).InitAnimals(3, 5);
         }
 
         // animals sit down

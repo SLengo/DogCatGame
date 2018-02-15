@@ -39,8 +39,11 @@ namespace DogCatGame
         public int bear_stay_width = 200;
         public int bear_stay_height = 200;
 
+        public int common_score = 0;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            #region background
             Image background = new Image();
             background.Source = (ImageSource)System.ComponentModel.TypeDescriptor.GetConverter(typeof(ImageSource))
                 .ConvertFromString(AppDomain.CurrentDomain.BaseDirectory + @"pngs\background.png");
@@ -53,7 +56,9 @@ namespace DogCatGame
             tv_back.Width = canvas_question.ActualWidth;
             canvas_question.Children.Add(tv_back);
             Canvas.SetZIndex(canvas_question, 5);
+            #endregion
 
+            #region start button
             StartButton.Click += new RoutedEventHandler(StartButton_click);
             StartButton.MouseEnter += new MouseEventHandler(StartButton_MouseOver);
             StartButton.MouseLeave += new MouseEventHandler(StartButton_MouseLeave);
@@ -70,13 +75,13 @@ namespace DogCatGame
             StartButton.Margin = new Thickness(100,150,0,0);
 
             canvas_question.Children.Add(StartButton);
-            
+            #endregion
         }
 
         private void StartButton_click(object sender, RoutedEventArgs e)
         {
             canvas_question.Children.Remove(StartButton);
-            InitAnimals();
+            InitAnimals(2, 5);
         }
         private void StartButton_MouseOver(object sender, RoutedEventArgs e)
         {
@@ -87,19 +92,13 @@ namespace DogCatGame
             (sender as Button).FontSize = 72;
         }
 
-        public void StartCompleted()
-        {
-            canvas_main.Children.Clear();
-            InitAnimals();
-        }
-
-        public void InitAnimals()
+        public void InitAnimals(int min, int max)
         {
             Random rand_count = new Random();
             Random rand_animal = new Random();
-            int count_animals = rand_count.Next(2, 5);
+            int count_animals = rand_count.Next(min, max);
             Animals.Animal new_animal = null;
-            for (int i = 0; i < count_animals; i++)
+            for (int i = AnimalsList.Count + 1; i < count_animals; i++)
             {
                 int kind = rand_animal.Next(0, 3);
                 switch (kind)
@@ -173,14 +172,14 @@ namespace DogCatGame
                             break;
                         }
                 }
-
+                if (AnimalsList.FirstOrDefault(o => o.Margin.Left == coord_to) != null)
+                    coord_to += coord_to < canvas_visual.ActualHeight / 2 ? -40 : 40;
                 // go animation
                 new_animal.GoLeftToRight(coord_to);
             }
 
             // ask question
             Questions.AskQuestion();
-
         }
         
     }
