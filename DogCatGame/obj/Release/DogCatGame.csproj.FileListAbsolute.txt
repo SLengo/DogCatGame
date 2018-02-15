@@ -1,0 +1,15 @@
+E:\DogCatGame\DogCatGame\bin\Release\DogCatGame.exe.config
+E:\DogCatGame\DogCatGame\bin\Release\DogCatGame.exe
+E:\DogCatGame\DogCatGame\bin\Release\DogCatGame.pdb
+E:\DogCatGame\DogCatGame\bin\Release\WpfAnimatedGif.dll
+E:\DogCatGame\DogCatGame\obj\Release\MainWindow.g.cs
+E:\DogCatGame\DogCatGame\obj\Release\App.g.cs
+E:\DogCatGame\DogCatGame\obj\Release\DogCatGame_MarkupCompile.cache
+E:\DogCatGame\DogCatGame\obj\Release\DogCatGame_MarkupCompile.lref
+E:\DogCatGame\DogCatGame\obj\Release\MainWindow.baml
+E:\DogCatGame\DogCatGame\obj\Release\DogCatGame.g.resources
+E:\DogCatGame\DogCatGame\obj\Release\DogCatGame.Properties.Resources.resources
+E:\DogCatGame\DogCatGame\obj\Release\DogCatGame.csproj.GenerateResource.Cache
+E:\DogCatGame\DogCatGame\obj\Release\DogCatGame.csproj.CoreCompileInputs.cache
+E:\DogCatGame\DogCatGame\obj\Release\DogCatGame.exe
+E:\DogCatGame\DogCatGame\obj\Release\DogCatGame.pdb

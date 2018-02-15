@@ -20,12 +20,9 @@ namespace DogCatGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-        public Button StartButton = new Button();
 
+        #region variables
+        public Button StartButton = new Button();
 
         public List<Animals.Animal> AnimalsList = new List<Animals.Animal>();
 
@@ -45,6 +42,12 @@ namespace DogCatGame
         public bool WasInit = false;
 
         public Label Score = null;
+        #endregion
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

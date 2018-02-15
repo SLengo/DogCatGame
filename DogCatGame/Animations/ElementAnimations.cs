@@ -18,6 +18,7 @@ namespace DogCatGame.Animations
 {
     public class ElementAnimations
     {
+        #region variables
         public static string dog_stay = AppDomain.CurrentDomain.BaseDirectory + @"gifs\dog.gif";
         public static string dog_run = AppDomain.CurrentDomain.BaseDirectory + @"gifs\dog_run.gif";
         public static string dog_run_l_t_r = AppDomain.CurrentDomain.BaseDirectory + @"gifs\dog_run_left_to_right.gif";
@@ -84,6 +85,7 @@ namespace DogCatGame.Animations
 
             panel_for_anim.BeginAnimation(StackPanel.MarginProperty, Go);
         }
+        #endregion
 
         public static void GoAnimationCompletedOne(object sender, EventArgs e)
         {
@@ -131,7 +133,7 @@ namespace DogCatGame.Animations
             }
         }
 
-
+        #region get gif path
         public static string DogStayGif()
         {
             return dog_stay;
@@ -158,5 +160,6 @@ namespace DogCatGame.Animations
         {
             return bear_run;
         }
+        #endregion
     }
 }
